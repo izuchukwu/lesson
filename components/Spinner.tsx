@@ -38,5 +38,3 @@ export const Spinner = ({
 		</Box>
 	</Box>
 )
-
-export default Spinner

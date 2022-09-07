@@ -10,7 +10,7 @@ import {
 	Divider,
 	Badge
 } from '@mantine/core'
-import Spinner from './Spinner'
+import {Spinner} from './Spinner'
 import {ClipboardIcon, ExclamationTriangleIcon} from '@radix-ui/react-icons'
 
 export type Lesson = {

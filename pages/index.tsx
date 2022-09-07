@@ -1,12 +1,12 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import {EmojiFavi} from './components/EmojiFavi'
-import {LessonWriter} from './components/LessonWriter'
-import {LessonViewer, Lesson} from './components/LessonViewer'
-import {Group, Stack, Divider, Text, Center} from '@mantine/core'
+import {EmojiFavi} from '../components/EmojiFavi'
+import {LessonWriter} from '../components/LessonWriter'
+import {LessonViewer, Lesson} from '../components/LessonViewer'
+import {Group, Stack, Divider} from '@mantine/core'
 import {useCallback, useEffect, useState} from 'react'
-import {usePrompt} from './components/everyprompt'
+import {usePrompt} from '../components/everyprompt'
 
 const Home: NextPage = () => {
 	const [input, setInput] = useState('')
