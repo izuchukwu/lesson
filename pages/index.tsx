@@ -93,7 +93,7 @@ const Home: NextPage = () => {
 					</MediaQuery>
 					<MediaQuery
 						smallerThan="sm"
-						styles={{height: 'unset', width: '100%'}}
+						styles={{height: 1, width: '100%'}}
 					>
 						<Stack
 							sx={{

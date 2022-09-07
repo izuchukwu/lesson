@@ -7,7 +7,9 @@ import {
 	CopyButton,
 	Center,
 	Title,
-	Divider
+	Divider,
+	Badge,
+	Tooltip
 } from '@mantine/core'
 import {Spinner} from './Spinner'
 import {ClipboardIcon, ExclamationTriangleIcon} from '@radix-ui/react-icons'
@@ -73,12 +75,11 @@ export const LessonViewer = ({
 		{!isLoading && lesson && (
 			<>
 				<Group position="apart">
-					<Group align="center">
-						<Title order={3}>{lesson.title}</Title>
-					</Group>
-					<CopyButton
-						timeout={2000}
-						value={`${lesson.title}
+					<Title order={3}>{lesson.title}</Title>
+					<Group sx={{gap: 5}}>
+						<CopyButton
+							timeout={2000}
+							value={`${lesson.title}
 					
 ${lesson.sections.map(
 	(section) => `${section.name}
@@ -95,20 +96,41 @@ ${question.answer}`
 ).join(`
 
 `)}`}
-					>
-						{({copied, copy}) => (
-							<Button
-								color={copied ? 'teal' : 'red'}
-								variant="subtle"
-								onClick={copy}
-								leftIcon={<ClipboardIcon />}
+						>
+							{({copied, copy}) => (
+								<Button
+									color={copied ? 'teal' : 'red'}
+									variant="subtle"
+									radius="md"
+									size="sm"
+									onClick={copy}
+									leftIcon={<ClipboardIcon />}
+								>
+									{copied ? 'Copied' : 'Copy'}
+								</Button>
+							)}
+						</CopyButton>
+						{duration && (
+							<Tooltip
+								label={`Written in ${(duration / 1000)
+									.toFixed(1)
+									.replace('.0', '')} seconds`}
+								position="bottom-end"
+								radius="md"
+								color="red"
+								sx={{fontSize: 12}}
 							>
-								{copied ? 'Copied' : 'Copy'}
-							</Button>
+								<Badge
+									color="red"
+									sx={{textTransform: 'none'}}
+								>{`${(duration / 1000)
+									.toFixed(1)
+									.replace('.0', '')}s`}</Badge>
+							</Tooltip>
 						)}
-					</CopyButton>
+					</Group>
 				</Group>
-				<Divider orientation="horizontal" my={15} />
+				<Divider orientation="horizontal" my={15} sx={{opacity: 0.5}} />
 				<Stack>
 					{lesson.sections.map((section, index) => (
 						<Stack key={index}>
@@ -119,7 +141,7 @@ ${question.answer}`
 						</Stack>
 					))}
 				</Stack>
-				<Divider orientation="horizontal" my={15} />
+				<Divider orientation="horizontal" my={15} sx={{opacity: 0.5}} />
 				<Text mb={15}>
 					<b>Questions</b>
 				</Text>
