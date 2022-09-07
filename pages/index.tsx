@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import {EmojiFavi} from '../components/EmojiFavi'
 import {LessonWriter} from '../components/LessonWriter'
 import {LessonViewer, Lesson} from '../components/LessonViewer'
-import {Group, Stack, Divider} from '@mantine/core'
+import {Group, Stack, Divider, MediaQuery} from '@mantine/core'
 import {useCallback, useEffect, useState} from 'react'
 import {usePrompt} from '../components/everyprompt'
 
@@ -52,45 +52,69 @@ const Home: NextPage = () => {
 				<EmojiFavi emoji="📕" />
 			</Head>
 
-			<Group sx={{gap: 0, height: '100vh'}} align="flex-start">
-				{/* sx={{width: 1}} makes flex-grow split equally */}
-				<Stack
-					sx={{
-						flexGrow: 1,
-						padding: '2rem',
-						width: 1,
-						height: '100%'
-					}}
-				>
-					<LessonWriter
-						level={level}
-						topic={topic}
-						input={input}
-						onLevelChange={setLevel}
-						onTopicChange={setTopic}
-						onInputChange={setInput}
-						onGo={onGo}
-					/>
-				</Stack>
-				<Divider orientation="vertical" />
-				<Stack
-					sx={{
-						flexGrow: 1,
-						padding: '2rem',
-						width: 1,
-						height: '100%',
-						overflowY: 'scroll',
-						position: 'relative'
-					}}
-				>
-					<LessonViewer
-						isLoading={isLoading}
-						lesson={lesson}
-						error={error}
-						duration={duration}
-					/>
-				</Stack>
-			</Group>
+			<MediaQuery
+				smallerThan="sm"
+				styles={{flexDirection: 'column', width: '100vw'}}
+			>
+				<Group sx={{gap: 0, height: '100vh'}} align="flex-start">
+					{/* sx={{width/height: 1}} makes flex-grow split equally */}
+					<MediaQuery
+						smallerThan="sm"
+						styles={{height: 1, width: '100%'}}
+					>
+						<Stack
+							sx={{
+								flexGrow: 1,
+								padding: '2rem',
+								width: 1,
+								height: '100%',
+								overflowY: 'scroll'
+							}}
+						>
+							<LessonWriter
+								level={level}
+								topic={topic}
+								input={input}
+								onLevelChange={setLevel}
+								onTopicChange={setTopic}
+								onInputChange={setInput}
+								onGo={onGo}
+							/>
+						</Stack>
+					</MediaQuery>
+					<MediaQuery smallerThan="sm" styles={{display: 'none'}}>
+						<Divider orientation="vertical" sx={{opacity: 0.5}} />
+					</MediaQuery>
+					<MediaQuery largerThan="sm" styles={{display: 'none'}}>
+						<Divider
+							orientation="horizontal"
+							sx={{width: '100%', opacity: 0.5}}
+						/>
+					</MediaQuery>
+					<MediaQuery
+						smallerThan="sm"
+						styles={{height: 'unset', width: '100%'}}
+					>
+						<Stack
+							sx={{
+								flexGrow: 1,
+								padding: '2rem',
+								width: 1,
+								height: '100%',
+								overflowY: 'scroll',
+								position: 'relative'
+							}}
+						>
+							<LessonViewer
+								isLoading={isLoading}
+								lesson={lesson}
+								error={error}
+								duration={duration}
+							/>
+						</Stack>
+					</MediaQuery>
+				</Group>
+			</MediaQuery>
 		</div>
 	)
 }

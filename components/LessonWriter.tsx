@@ -93,7 +93,7 @@ const OptionsBar = ({
 					size="xs"
 					radius="md"
 					icon={
-						<Text color="dimmed" size="xs" mt={3}>
+						<Text color="dimmed" size="xs" mt={1}>
 							Level
 						</Text>
 					}
@@ -110,7 +110,7 @@ const OptionsBar = ({
 					size="xs"
 					radius="md"
 					icon={
-						<Text color="dimmed" size="xs" mt={3}>
+						<Text color="dimmed" size="xs" mt={1}>
 							Topic
 						</Text>
 					}

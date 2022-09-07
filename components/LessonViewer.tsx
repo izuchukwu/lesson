@@ -7,8 +7,7 @@ import {
 	CopyButton,
 	Center,
 	Title,
-	Divider,
-	Badge
+	Divider
 } from '@mantine/core'
 import {Spinner} from './Spinner'
 import {ClipboardIcon, ExclamationTriangleIcon} from '@radix-ui/react-icons'
@@ -71,7 +70,7 @@ export const LessonViewer = ({
 				</Text>
 			</Center>
 		)}
-		{lesson && (
+		{!isLoading && lesson && (
 			<>
 				<Group position="apart">
 					<Group align="center">
